@@ -1,0 +1,23 @@
+```{r}
+# Biblioteca necessaria para carregar dados
+library(datasets)
+# Biblioteca para plotar dados em um gráfico
+library(ggplot2)
+
+# foi utilizado os dados da base iris da biblioteca datasets
+# retirei a duas ultimas colunas (3:4) para tirar a coluna de classificação dessa base.
+corpus_treinamento <-iris[, 3:4]
+
+#aplicando o kmeans, foi definido 3 clusters
+irisCluster <- kmeans(corpus_treinamento, 3, nstart = 20)
+
+# criando em um vetor todos os clusters gerados 
+irisCluster$cluster <- as.factor(irisCluster$cluster)
+
+# representação gráfica do modelo
+ggplot(data=iris, aes(x=corpus_treinamento$Petal.Length, y=corpus_treinamento$Petal.Width, color=irisCluster$cluster)) + geom_point()
+
+# apresenta resultados do modelo.
+print(irisCluster)
+
+``` 
